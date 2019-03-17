@@ -1,6 +1,6 @@
 'use strict';
 
-require('dotenv').load();
+// require('dotenv').load();
 
 const express = require('express')
 const app = express()
@@ -9,7 +9,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const mongoose = require('mongoose')
-// mongoose.connect(process.env.MLAB_URI || 'mongodb://localhost/exercise-track' )
+
 mongoose.connect(process.env.MONGOLAB_URI,
   {useNewUrlParser: true},
   function(error){
@@ -103,7 +103,6 @@ var pushExer = function(req,res,data){
   var id= req.body.userId;
   var description= req.body.description;
   var duration= req.body.duration;
-  // var date= req.body.date;
 
   if (description=='') { return res.send('Path `description` is required.')}
   if (duration=='') { return res.send('Path `duration` is required.')}
@@ -192,9 +191,8 @@ app.get('/api/exercise/log',(req,res)=>{
   })
 });
 
-// {"_id":"HyQmFTsv4","username":"testhey","count":3,"log":[{"description":"testing 1","duration":3,"date":"Thu Jan 01 1970"},{"description":"testing 1","duration":3,"date":"Thu Jan 01 1970"},{"description":"testing 1","duration":3,"date":"Thu Jan 01 1970"}]}
 
-//app.get('/name',(req,res)=>{res.json({name: req.query.first+' '+req.query.last})})
+// End of my own code
 
 // Error handling
 
@@ -202,8 +200,6 @@ app.get('/api/exercise/log',(req,res)=>{
 app.use((req, res, next) => {
   return next({status: 404, message: 'not found'})
 })
-
-
 
 // Error Handling middleware
 app.use((err, req, res, next) => {
@@ -223,7 +219,3 @@ app.use((err, req, res, next) => {
   res.status(errCode).type('txt')
     .send(errMessage)
 })
-
-//{"_id":"HyQmFTsv4","username":"testhey","to":"Sun Jan 01 2017","count":2,"log":[{"description":"testing 1","duration":3,"date":"Thu Jan 01 1970"},{"description":"testing 1","duration":3,"date":"Thu Jan 01 1970"}]}
-
-//{"_id":"HyQmFTsv4","username":"testhey","count":3,"log":[{"description":"testing 1","duration":3,"date":"Thu Jan 01 1970"},{"description":"testing 1","duration":3,"date":"Thu Jan 01 1970"},{"description":"testing 1","duration":3,"date":"Thu Jan 01 1970"}]}
